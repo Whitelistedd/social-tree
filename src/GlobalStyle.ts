@@ -1,7 +1,11 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components'
 
 export const GlobalStyle = createGlobalStyle`
-  *,*::before,*::after {
-    box-sizing: border-box;
+  html,body {
+    margin: 0px;
+    padding: 0px;
   }
-`;
+  html,body,* {
+    box-sizing: border-box !important;
+  }
+`

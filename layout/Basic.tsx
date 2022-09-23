@@ -1,4 +1,4 @@
-import { GlobalStyle } from '../src/GlobalStyle'
+import { GlobalStyle } from 'src/GlobalStyle'
 
 const BasicLayout = ({ children }: { children: any }) => {
   return (
