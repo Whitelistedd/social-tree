@@ -8,5 +8,15 @@ export const GlobalStyle = createGlobalStyle`
   }
 
 
+  button, input {
+    border: none;
+    outline: none;
+  }
+
+  button:hover, a:hover {
+      cursor: pointer;
+    }
+
 
 `;
+
