@@ -1,11 +1,21 @@
 import { createGlobalStyle } from 'styled-components'
 
 export const GlobalStyle = createGlobalStyle`
-  html,body {
-    margin: 0px;
-    padding: 0px;
+  *,*::before,*::after {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
   }
-  html,body,* {
-    box-sizing: border-box !important;
+
+
+  button, input {
+    border: none;
+    outline: none;
   }
+
+  button:hover, a:hover {
+      cursor: pointer;
+    }
+
+
 `

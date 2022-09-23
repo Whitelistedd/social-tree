@@ -6,8 +6,10 @@ export const Name = styled.p`
 
 export const SocialLoginButton = styled.button`
   background-color: #3773fd;
+  padding: 10px 50px;
   width: 100%;
   border: 0px;
+  color: white;
 `
 
 export const Title = styled.h1`
@@ -20,7 +22,7 @@ export const Wrap = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: white;
+  background-color: black;
 `
 
 export const Container = styled.div`

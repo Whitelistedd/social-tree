@@ -1,13 +1,15 @@
-import '../styles/globals.css'
-
 import type { AppProps } from 'next/app'
-import BasicLayout from 'layout/Basic'
+import { GlobalStyle } from 'src/GlobalStyle'
+import { useRouter } from 'next/router'
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const router = useRouter()
+
   return (
-    <BasicLayout>
+    <>
+      <GlobalStyle />
       <Component {...pageProps} />
-    </BasicLayout>
+    </>
   )
 }
 
