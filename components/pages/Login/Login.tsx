@@ -87,6 +87,7 @@ export const Login = () => {
               label="Password"
               {...form.getInputProps('password')}
             />
+            {/* @ts-ignore */}
             <StyledButton type="submit">Login</StyledButton>
             <NewAccount>
               Don't have an account? <Link href={'/signup'}>Signup</Link>
