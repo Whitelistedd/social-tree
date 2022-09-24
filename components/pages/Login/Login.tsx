@@ -1,7 +1,6 @@
 import {
   Container,
   Form,
-  LoginButton,
   LoginFormContainer,
   NewAccount,
   StyledButton,
@@ -9,6 +8,7 @@ import {
   Title,
   Wrap,
 } from './Login-styles'
+import { onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth'
 
 import Cookies from 'js-cookie'
 import { FullLogo } from 'components/shared/FullLogo/FullLogo'
@@ -17,7 +17,6 @@ import { PasswordInput } from '@mantine/core'
 import { SocialLoginButtons } from 'components/shared/SocialLoginButtons/SocialLoginButtons'
 import { Splitter } from 'components/shared/Splitter/Splitter'
 import { auth } from 'lib/clientApp'
-import { signInWithEmailAndPassword } from 'firebase/auth'
 import { useEffect } from 'react'
 import { useForm } from '@mantine/form'
 import { useRouter } from 'next/router'
@@ -55,9 +54,17 @@ export const Login = () => {
   }
 
   useEffect(() => {
-    const token = Cookies.get('token')
-    if (token) {
-      router.push('/')
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        router.push('/')
+      } else {
+        // User is signed out
+        // ...
+      }
+    })
+
+    return () => {
+      unsubscribe()
     }
   }, [])
 
