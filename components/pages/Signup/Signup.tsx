@@ -110,6 +110,7 @@ export const Signup = () => {
               label="Confirm your password"
               {...form.getInputProps('confirmPassword')}
             />
+            {/* @ts-ignore */}
             <StyledButton type="submit">Login</StyledButton>
             <NewAccount>
               Do you have an account? <Link href={'/login'}>Login</Link>
