@@ -13,12 +13,10 @@ export const LoginButton = styled.div`
 `
 
 export const StyledButton = styled(Button)<{ type: string }>`
-  background-color: white;
+  background-color: #3773fd;
   color: black;
   font-size: 1.2rem;
-  border: 1px solid grey;
-  color: grey;
-  background-color: rgba(205, 205, 205, 0.5);
+  color: white;
 `
 
 export const StyledTextInput = styled(TextInput)`
