@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import styled from 'styled-components'
+import { themeType } from 'src/theme'
 
 export const Icon = styled(Image)`
   width: 42px;
@@ -12,7 +13,7 @@ export const Name = styled.p`
   font-family: 'League Spartan', sans-serif;
 `
 
-export const Container = styled.button`
+export const Container = styled.button<{ theme: themeType }>`
   background-color: white;
   padding: 10px 50px;
   width: 100%;
@@ -22,5 +23,11 @@ export const Container = styled.button`
   gap: 10px;
   align-items: center;
   border-radius: 5px;
-  border: 2px solid black;
+  border: 1px solid black;
+  transition: 200ms ease;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.primary};
+    color: ${({ theme }) => theme.secondary};
+  }
 `

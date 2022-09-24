@@ -1,23 +1,29 @@
 import { Button, TextInput } from '@mantine/core'
 
 import styled from 'styled-components'
+import { themeType } from 'src/theme'
 
 export const NewAccount = styled.span`
-  font-size: 0.9rem;
+  font-size: 1rem;
   text-align: center;
+  a {
+    color: blue;
+  }
 `
 
-export const LoginButton = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-`
-
-export const StyledButton = styled(Button)<{ type: string }>`
-  background-color: #3773fd;
+export const StyledButton = styled(Button)<{ type: string; theme: themeType }>`
+  background-color: ${({ theme }) => theme.primary};
   color: black;
   font-size: 1.2rem;
   color: white;
+  min-height: 40px;
+  border: 1px solid ${({ theme }) => theme.primary};
+  transition: 200ms ease;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.secondary};
+    color: ${({ theme }) => theme.primary};
+  }
 `
 
 export const StyledTextInput = styled(TextInput)`
@@ -42,6 +48,8 @@ export const LoginFormContainer = styled.div`
 export const Title = styled.h1`
   margin: 0px;
   font-size: 1.8rem;
+  font-weight: 400;
+  margin-top: 50px;
 `
 
 export const Wrap = styled.div`
@@ -52,13 +60,10 @@ export const Wrap = styled.div`
   gap: 20px;
   flex-direction: column;
   background-color: white;
-  * {
-    font-family: 'League Spartan', sans-serif;
-  }
 `
 
-export const Container = styled.div`
+export const Container = styled.div<{ theme: themeType }>`
   width: 100vw;
   height: 100vh;
-  background-color: #3773fd;
+  background-color: ${({ theme }) => theme.primary};
 `

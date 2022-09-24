@@ -1,7 +1,6 @@
 import {
   Container,
   Form,
-  LoginButton,
   LoginFormContainer,
   NewAccount,
   StyledButton,
@@ -11,7 +10,7 @@ import {
 } from '../Login/Login-styles'
 import {
   createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
+  onAuthStateChanged,
 } from 'firebase/auth'
 
 import Cookies from 'js-cookie'
@@ -29,7 +28,7 @@ type values = {
   email: string
   username: string
   password: string
-  Confirmpassword: string
+  confirmPassword: string
 }
 
 export const Signup = () => {
@@ -39,7 +38,7 @@ export const Signup = () => {
       email: '',
       username: '',
       password: '',
-      Confirmpassword: '',
+      confirmPassword: '',
     },
 
     validate: {
@@ -48,7 +47,7 @@ export const Signup = () => {
   })
 
   const handleFormSubmit = (values: values) => {
-    if (values.password === values.Confirmpassword) {
+    if (values.password === values.confirmPassword) {
       createUserWithEmailAndPassword(auth, values.email, values.password)
         .then((userCredential: any) => {
           const token = userCredential.user.accessToken
@@ -61,12 +60,24 @@ export const Signup = () => {
           console.log({ errorCode, errorMessage })
         })
     }
+    form.setErrors({
+      password: 'password doesnt match',
+      confirmPassword: 'password doesnt match',
+    })
   }
 
   useEffect(() => {
-    const token = Cookies.get('token')
-    if (token) {
-      router.push('/')
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        router.push('/')
+      } else {
+        // User is signed out
+        // ...
+      }
+    })
+
+    return () => {
+      unsubscribe()
     }
   }, [])
 
@@ -97,7 +108,7 @@ export const Signup = () => {
             <PasswordInput
               required
               label="Confirm your password"
-              {...form.getInputProps('Confirmpassword')}
+              {...form.getInputProps('confirmPassword')}
             />
             <StyledButton type="submit">Login</StyledButton>
             <NewAccount>
