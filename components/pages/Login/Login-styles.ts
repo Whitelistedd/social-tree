@@ -2,8 +2,9 @@ import { Button, TextInput } from '@mantine/core'
 
 import styled from 'styled-components'
 
-export const NewAccount = styled.p`
+export const NewAccount = styled.span`
   font-size: 0.9rem;
+  text-align: center;
 `
 
 export const LoginButton = styled.div`
@@ -40,12 +41,11 @@ export const LoginFormContainer = styled.div`
 
 export const Title = styled.h1`
   margin: 0px;
-  color: white;
   font-size: 1.8rem;
 `
 
 export const Wrap = styled.div`
-  width: 360px;
+  width: 400px;
   padding: 50px 0px 0px 42px;
   height: 100vh;
   display: flex;

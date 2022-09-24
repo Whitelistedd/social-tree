@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  color: white;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -9,13 +8,13 @@ export const Container = styled.div`
   ::before {
     content: ' ';
     width: 45%;
-    background-color: white;
-    height: 2px;
+    background-color: black;
+    height: 1px;
   }
   ::after {
     content: ' ';
     width: 45%;
-    background-color: white;
-    height: 2px;
+    background-color: black;
+    height: 1px;
   }
 `
