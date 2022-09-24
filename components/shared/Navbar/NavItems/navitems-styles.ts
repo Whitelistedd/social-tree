@@ -20,6 +20,7 @@ export const NavItem = styled.li`
   align-items: center;
   border-bottom: 2px solid transparent;
   transition: 1s border-bottom ease;
+  font-family: 'League Spartan', sans-serif;
 
   &:hover {
     cursor: pointer;

@@ -1,9 +1,11 @@
 import React from 'react'
 
-const index = () => {
+const discoverPage = () => {
   return (
-    <div>index</div>
+    <div>
+      <h1>Discover Page</h1>
+    </div>
   )
 }
 
-export default index
+export default discoverPage

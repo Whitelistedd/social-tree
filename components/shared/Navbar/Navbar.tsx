@@ -22,19 +22,18 @@ const Navbar = () => {
   const [open, setOpen] = useState(false)
   const title = open ? 'Close navigation' : 'Open navigation'
 
-
+  const handleNavClick = () => setOpen(false);
 
   const buttons = (
     <>
-      <Link href="/login">
-        <LoginButton>Sign in</LoginButton>
-      </Link>
       <Link href="/signup">
-        <RegisterButton>Create Account</RegisterButton>
+        <RegisterButton onClick={() => setOpen(false)}>Create Account</RegisterButton>
+      </Link>
+      <Link href="/login">
+        <LoginButton onClick={() => setOpen(false)}>Sign in</LoginButton>
       </Link>
     </>
   )
-
 
   return (
     <>
@@ -46,7 +45,7 @@ const Navbar = () => {
           <BurgerWrapper>
             <Burger
               opened={open}
-              onClick={() => setOpen((o) => !o)}
+              onClick={() => setOpen(!open)}
               title={title}
             />
           </BurgerWrapper>
@@ -57,14 +56,9 @@ const Navbar = () => {
           </NavItemsWrapper>
         </NavContainer>
       </StyledNavbar>
-      <AnimatePresence>
-      {open && <Modal buttons={buttons} />}
-      </AnimatePresence>
+      <AnimatePresence>{open && <Modal setOpen={setOpen} buttons={buttons} />}</AnimatePresence>
     </>
   )
 }
 
 export default Navbar
-
-
-

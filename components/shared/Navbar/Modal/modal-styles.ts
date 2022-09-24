@@ -3,7 +3,6 @@ import styled from 'styled-components'
 
 export const StyledModal = styled(motion.header)`
   display: none;
-  background-color: rgb(243, 243, 241);
 
   @media (max-width: 1000px) {
     display: block;
@@ -14,6 +13,8 @@ export const StyledModal = styled(motion.header)`
     z-index: 10;
     inset: 0;
     display: grid;
+  background-color: #f4f4f7;
+
   }
 `
 
