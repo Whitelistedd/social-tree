@@ -9,7 +9,6 @@ export const Icon = styled(Image)`
 export const Name = styled.p`
   font-weight: 500;
   font-size: 1.2rem;
-  color: grey;
   font-family: 'League Spartan', sans-serif;
 `
 
@@ -23,5 +22,5 @@ export const Container = styled.button`
   gap: 10px;
   align-items: center;
   border-radius: 5px;
-  border: 2px solid grey;
+  border: 2px solid black;
 `
