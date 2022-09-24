@@ -1,11 +1,15 @@
 import type { AppProps } from 'next/app'
-import LayoutWrapper from 'layout/Layout'
+import { GlobalStyle } from 'src/GlobalStyle'
+import { useRouter } from 'next/router'
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const router = useRouter()
+
   return (
-    <LayoutWrapper>
+    <>
+      <GlobalStyle />
       <Component {...pageProps} />
-    </LayoutWrapper>
+    </>
   )
 }
 
