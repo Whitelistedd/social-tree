@@ -3,8 +3,6 @@ import { Button, TextInput } from '@mantine/core'
 import styled from 'styled-components'
 
 export const NewAccount = styled.p`
-  color: white;
-  font-weight: 700;
   font-size: 0.9rem;
 `
 
@@ -14,15 +12,18 @@ export const LoginButton = styled.div`
   gap: 10px;
 `
 
-export const StyledButton = styled(Button)`
+export const StyledButton = styled(Button)<{ type: string }>`
   background-color: white;
   color: black;
   font-size: 1.2rem;
+  border: 1px solid grey;
+  color: grey;
+  background-color: rgba(205, 205, 205, 0.5);
 `
 
 export const StyledTextInput = styled(TextInput)`
   label {
-    color: white;
+    font-size: 0.9rem;
   }
 `
 
@@ -42,8 +43,6 @@ export const LoginFormContainer = styled.div`
 export const Title = styled.h1`
   margin: 0px;
   color: white;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
-    'Lucida Sans', Arial, sans-serif;
   font-size: 1.8rem;
 `
 
@@ -54,10 +53,14 @@ export const Wrap = styled.div`
   display: flex;
   gap: 20px;
   flex-direction: column;
-  background-color: #3773fd;
+  background-color: white;
+  * {
+    font-family: 'League Spartan', sans-serif;
+  }
 `
 
 export const Container = styled.div`
   width: 100vw;
   height: 100vh;
+  background-color: #3773fd;
 `
