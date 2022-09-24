@@ -12,4 +12,6 @@ export const Logo = styled.div`
   gap: 10px;
   font-size: 2rem;
   font-weight: 700;
+  font-family: 'League Spartan', sans-serif;
+  color: black;
 `
