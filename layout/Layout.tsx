@@ -1,4 +1,4 @@
-import { GlobalStyle } from '../src/GlobalStyle'
+import { GlobalStyle } from '../globa-styles/GlobalStyle'
 import Navbar from 'components/shared/Navbar/Navbar'
 import React from 'react'
 

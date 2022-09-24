@@ -45,7 +45,7 @@ const Navbar = () => {
           <BurgerWrapper>
             <Burger
               opened={open}
-              onClick={() => setOpen((o) => !o)}
+              onClick={() => setOpen(!open)}
               title={title}
             />
           </BurgerWrapper>

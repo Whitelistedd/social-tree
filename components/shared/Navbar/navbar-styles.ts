@@ -53,6 +53,8 @@ export const LoginButton = styled.button`
   box-shadow: none;
   color: #3673fc;
   border-radius: 3px;
+  font-family: 'League Spartan', sans-serif;
+
   @media (max-width: 1000px) {
     width: 300px;
     font-size: 20px;
@@ -72,6 +74,7 @@ export const RegisterButton = styled.button`
   padding: 1rem 1.4rem;
   border-radius: 3px;
   border: 1px solid transparent;
+  font-family: 'League Spartan', sans-serif;
 
   @media (max-width: 1000px) {
     width: 300px;
