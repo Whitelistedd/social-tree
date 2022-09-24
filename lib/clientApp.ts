@@ -3,6 +3,7 @@ import 'firebase/firestore'
 import 'firebase/storage'
 
 import firebase from 'firebase/app'
+import { getAuth } from 'firebase/auth'
 
 const clientCredentials = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -14,6 +15,8 @@ const clientCredentials = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 }
 
-firebase.initializeApp(clientCredentials)
+const app = firebase.initializeApp(clientCredentials)
 
-export default firebase
+export const auth = getAuth(app)
+
+export default app
