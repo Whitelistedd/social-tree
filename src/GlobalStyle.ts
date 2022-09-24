@@ -15,7 +15,10 @@ export const GlobalStyle = createGlobalStyle`
 
   button:hover, a:hover {
       cursor: pointer;
-    }
+  }
 
+  * {
+    font-family: 'League Spartan', sans-serif;
+  }
 
 `

@@ -1,10 +1,12 @@
+import { Discover } from 'components/pages/Discover/Discover'
+import LayoutWrapper from 'layout/Layout'
 import React from 'react'
 
 const discoverPage = () => {
   return (
-    <div>
-      <h1>Discover Page</h1>
-    </div>
+    <LayoutWrapper>
+      <Discover />
+    </LayoutWrapper>
   )
 }
 

@@ -11,7 +11,11 @@ export const Logo = styled.div`
   align-items: center;
   gap: 10px;
   font-size: 2rem;
-  font-weight: 700;
+  font-weight: 300;
   font-family: 'League Spartan', sans-serif;
   color: black;
+
+  &:hover {
+    cursor: pointer;
+  }
 `

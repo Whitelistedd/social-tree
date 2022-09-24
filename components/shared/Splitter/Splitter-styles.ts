@@ -8,13 +8,15 @@ export const Container = styled.div`
   ::before {
     content: ' ';
     width: 45%;
-    background-color: black;
+    background-color: grey;
+    opacity: 0.7;
     height: 1px;
   }
   ::after {
     content: ' ';
     width: 45%;
-    background-color: black;
+    background-color: grey;
+    opacity: 0.7;
     height: 1px;
   }
 `
