@@ -7,9 +7,11 @@ import {
   StyledTextInput,
   Title,
   Wrap,
-} from './Login-styles'
-import { onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth'
-
+} from '../Login/Login-styles'
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+} from 'firebase/auth'
 
 import Cookies from 'js-cookie'
 import { FullLogo } from 'components/shared/FullLogo/FullLogo'
@@ -24,15 +26,19 @@ import { useRouter } from 'next/router'
 
 type values = {
   email: string
+  username: string
   password: string
+  confirmPassword: string
 }
 
-export const Login = () => {
+export const Signup = () => {
   const router = useRouter()
   const form = useForm({
     initialValues: {
       email: '',
+      username: '',
       password: '',
+      confirmPassword: '',
     },
 
     validate: {
@@ -40,21 +46,24 @@ export const Login = () => {
     },
   })
 
-
-  console.log(auth)
-
-  const handleFormSubmit = async (values: values) => {
-    try {
-      const { user }: any = await signInWithEmailAndPassword(auth, values.email, values.password)
-      
-      const token = user.accessToken
-
-      Cookies.set('token', token ? token : '')
-      router.push('/')
-      
-    } catch ({ code, message }) {
-      console.log({ code, message })
+  const handleFormSubmit = (values: values) => {
+    if (values.password === values.confirmPassword) {
+      createUserWithEmailAndPassword(auth, values.email, values.password)
+        .then((userCredential: any) => {
+          const token = userCredential.user.accessToken
+          Cookies.set('token', token ? token : '')
+          router.push('/')
+        })
+        .catch((error) => {
+          const errorCode = error.code
+          const errorMessage = error.message
+          console.log({ errorCode, errorMessage })
+        })
     }
+    form.setErrors({
+      password: 'password doesnt match',
+      confirmPassword: 'password doesnt match',
+    })
   }
 
   useEffect(() => {
@@ -69,7 +78,6 @@ export const Login = () => {
 
     return () => {
       unsubscribe()
-
     }
   }, [])
 
@@ -77,11 +85,16 @@ export const Login = () => {
     <Container>
       <Wrap>
         <FullLogo />
-        <Title>Log in to your account</Title>
+        <Title>Create your account</Title>
         <LoginFormContainer>
           <SocialLoginButtons />
           <Splitter />
           <Form onSubmit={form.onSubmit((values) => handleFormSubmit(values))}>
+            <StyledTextInput
+              required
+              label="Username"
+              {...form.getInputProps('username')}
+            />
             <StyledTextInput
               required
               label="Email Address"
@@ -92,10 +105,15 @@ export const Login = () => {
               label="Password"
               {...form.getInputProps('password')}
             />
+            <PasswordInput
+              required
+              label="Confirm your password"
+              {...form.getInputProps('confirmPassword')}
+            />
             {/* @ts-ignore */}
             <StyledButton type="submit">Login</StyledButton>
             <NewAccount>
-              Don't have an account? <Link href={'/signup'}>Signup</Link>
+              Do you have an account? <Link href={'/login'}>Login</Link>
             </NewAccount>
           </Form>
         </LoginFormContainer>
@@ -103,5 +121,3 @@ export const Login = () => {
     </Container>
   )
 }
-
-

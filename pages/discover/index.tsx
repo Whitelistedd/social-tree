@@ -1,12 +1,15 @@
-import BasicLayout from 'layout/Layout'
+
 import type { NextPage } from 'next'
+import { Discover } from 'components/pages/Discover/Discover'
+import LayoutWrapper from 'layout/Layout'
 import React from 'react'
 
 const discoverPage: NextPage = () => {
   return (
-    <BasicLayout>
-      <h1>Discover Page</h1>
-    </BasicLayout>
+    <LayoutWrapper>
+      <Discover />
+    </LayoutWrapper>
+
   )
 }
 

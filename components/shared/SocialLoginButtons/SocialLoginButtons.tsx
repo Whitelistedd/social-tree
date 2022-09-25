@@ -4,14 +4,20 @@ import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 import Cookies from 'js-cookie'
 import GoogleIcon from 'public/assets/images/google.svg'
 import { auth } from 'lib/clientApp'
+import { useRouter } from 'next/router'
 
 export const SocialLoginButtons: React.FC = () => {
   const provider = new GoogleAuthProvider()
+  const router = useRouter()
 
   const handleLoginWithGoogle = async () => {
     const { user }: any = await signInWithPopup(auth, provider)
       const token = user.accessToken
       Cookies.set('token', token ? token : '')
+
+      router.push('/')
+    }
+
   }
 
   return (

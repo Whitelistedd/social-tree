@@ -3,6 +3,7 @@ import 'firebase/firestore'
 import 'firebase/storage'
 
 import { getAuth } from 'firebase/auth'
+import { getFirestore } from 'firebase/firestore'
 import { initializeApp } from 'firebase/app'
 
 export const clientCredentials = {
@@ -16,6 +17,8 @@ export const clientCredentials = {
 }
 
 const app = initializeApp(clientCredentials)
+
+export const db = getFirestore(app)
 
 export const auth = getAuth(app)
 
