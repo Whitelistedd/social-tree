@@ -1,8 +1,12 @@
+import BasicLayout from 'layout/Layout'
+import type { NextPage } from 'next'
 import React from 'react'
 
-const learnPage = () => {
+const learnPage: NextPage = () => {
   return (
-    <h1>Learn Page</h1>
+    <BasicLayout>
+      <h1>Learn Page</h1>
+    </BasicLayout>
   )
 }
 

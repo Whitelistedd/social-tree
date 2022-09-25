@@ -1,10 +1,12 @@
+import BasicLayout from 'layout/Layout'
+import type { NextPage } from 'next'
 import React from 'react'
 
-const discoverPage = () => {
+const discoverPage: NextPage = () => {
   return (
-    <div>
+    <BasicLayout>
       <h1>Discover Page</h1>
-    </div>
+    </BasicLayout>
   )
 }
 

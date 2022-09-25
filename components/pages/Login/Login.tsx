@@ -9,10 +9,6 @@ import {
   Title,
   Wrap,
 } from './Login-styles'
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from 'firebase/auth'
 
 import Cookies from 'js-cookie'
 import { FullLogo } from 'components/shared/FullLogo/FullLogo'
@@ -21,6 +17,9 @@ import { PasswordInput } from '@mantine/core'
 import { SocialLoginButtons } from 'components/shared/SocialLoginButtons/SocialLoginButtons'
 import { Splitter } from 'components/shared/Splitter/Splitter'
 import { auth } from 'lib/clientApp'
+import {
+  signInWithEmailAndPassword,
+} from 'firebase/auth'
 import { useEffect } from 'react'
 import { useForm } from '@mantine/form'
 import { useRouter } from 'next/router'
@@ -43,24 +42,27 @@ export const Login = () => {
     },
   })
 
-  const handleFormSubmit = (values: values) => {
-    signInWithEmailAndPassword(auth, values.email, values.password)
-      .then((userCredential: any) => {
-        const token = userCredential.user.accessToken
-        Cookies.set('token', token ? token : '')
-        router.push('/')
-      })
-      .catch((error) => {
-        const errorCode = error.code
-        const errorMessage = error.message
-        console.log({ errorCode, errorMessage })
-      })
+
+  console.log(auth)
+
+  const handleFormSubmit = async (values: values) => {
+    try {
+      const { user }: any = await signInWithEmailAndPassword(auth, values.email, values.password)
+      
+      const token = user.accessToken
+
+      Cookies.set('token', token ? token : '')
+      router.push('/')
+      
+    } catch ({ code, message }) {
+      console.log({ code, message })
+    }
   }
 
   useEffect(() => {
     const token = Cookies.get('token')
     if (token) {
-      router.push('/')
+      router.push("/")
     }
   }, [])
 
@@ -95,3 +97,5 @@ export const Login = () => {
     </Container>
   )
 }
+
+

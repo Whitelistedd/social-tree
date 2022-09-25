@@ -8,12 +8,10 @@ import { auth } from 'lib/clientApp'
 export const SocialLoginButtons: React.FC = () => {
   const provider = new GoogleAuthProvider()
 
-  const handleLoginWithGoogle = () => {
-    signInWithPopup(auth, provider).then((result: any) => {
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      const token = result.user.accessToken
+  const handleLoginWithGoogle = async () => {
+    const { user }: any = await signInWithPopup(auth, provider)
+      const token = user.accessToken
       Cookies.set('token', token ? token : '')
-    })
   }
 
   return (

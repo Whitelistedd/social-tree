@@ -10,12 +10,12 @@ export const Container = styled.div`
     content: ' ';
     width: 45%;
     background-color: white;
-    height: 2px;
+    height: 1px;
   }
   ::after {
     content: ' ';
     width: 45%;
     background-color: white;
-    height: 2px;
+    height: 1px;
   }
 `

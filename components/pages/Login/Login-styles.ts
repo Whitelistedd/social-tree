@@ -12,7 +12,7 @@ export const LoginButton = styled.div`
   gap: 10px;
 `
 
-export const StyledButton = styled(Button)<{ type: string }>`
+export const StyledButton = styled(Button)<{ type: "string" }>`
   background-color: #3773fd;
   color: black;
   font-size: 1.2rem;
