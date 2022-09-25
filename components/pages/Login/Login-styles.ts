@@ -41,26 +41,38 @@ export const Form = styled.form`
 
 export const LoginFormContainer = styled.div`
   display: flex;
-  margin-right: 42px;
-  gap: 20px;
   flex-direction: column;
+  width: 90%;
+  gap: .5rem;
+
+  @media (max-width: 1000px){
+    width: 60%;
+  }
+
+  @media (max-width: 550px){
+    width: 90%;
+  }
 `
 
 export const Title = styled.h1`
-  margin: 0px;
   font-size: 1.8rem;
   font-weight: 400;
-  margin-top: 50px;
 `
 
 export const Wrap = styled.div`
-  width: 400px;
-  padding: 50px 0px 0px 42px;
+  width: 500px;
   height: 100vh;
-  display: flex;
-  gap: 20px;
-  flex-direction: column;
   background-color: white;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+
+  @media (max-width: 1000px){
+    width: 100vw;
+  }
 `
 
 export const Container = styled.div<{ theme: themeType }>`

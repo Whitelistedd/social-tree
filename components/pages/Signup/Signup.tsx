@@ -68,12 +68,12 @@ export const Signup = () => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        router.push('/')
-      } else {
-        // User is signed out
-        // ...
-      }
+      // if (user) {
+      //   router.push('/')
+      // } else {
+      //   // User is signed out
+      //   // ...
+      // }
     })
 
     return () => {
