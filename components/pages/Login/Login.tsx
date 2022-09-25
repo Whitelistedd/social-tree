@@ -10,7 +10,6 @@ import {
 } from './Login-styles'
 import { onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth'
 
-
 import Cookies from 'js-cookie'
 import { FullLogo } from 'components/shared/FullLogo/FullLogo'
 import Link from 'next/link'
@@ -30,6 +29,7 @@ type values = {
 export const Login = () => {
   const router = useRouter()
   const form = useForm({
+    validateInputOnChange: true,
     initialValues: {
       email: '',
       password: '',
@@ -37,6 +37,7 @@ export const Login = () => {
 
     validate: {
       email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
+      password: (value) => (value.length < 9 ? 'password length should be atleast 10 characters' : null),
     },
   })
 
@@ -46,12 +47,12 @@ export const Login = () => {
   const handleFormSubmit = async (values: values) => {
     try {
       const { user }: any = await signInWithEmailAndPassword(auth, values.email, values.password)
-      
+
       const token = user.accessToken
 
       Cookies.set('token', token ? token : '')
       router.push('/')
-      
+
     } catch ({ code, message }) {
       console.log({ code, message })
     }
@@ -59,12 +60,12 @@ export const Login = () => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        router.push('/')
-      } else {
-        // User is signed out
-        // ...
-      }
+      // if (user) {
+      //   router.push('/')
+      // } else {
+      //   // User is signed out
+      //   // ...
+      // }
     })
 
     return () => {
@@ -72,6 +73,9 @@ export const Login = () => {
 
     }
   }, [])
+
+
+
 
   return (
     <Container>
@@ -81,7 +85,7 @@ export const Login = () => {
         <LoginFormContainer>
           <SocialLoginButtons />
           <Splitter />
-          <Form onSubmit={form.onSubmit((values) => handleFormSubmit(values))}>
+          <Form onSubmit={form.onSubmit((values) => handleFormSubmit(values))} noValidate>
             <StyledTextInput
               required
               label="Email Address"

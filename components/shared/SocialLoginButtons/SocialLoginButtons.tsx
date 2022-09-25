@@ -18,7 +18,6 @@ export const SocialLoginButtons: React.FC = () => {
       router.push('/')
     }
 
-  }
 
   return (
     <>

@@ -2,8 +2,7 @@ import Lottie from 'lottie-react'
 import styled from 'styled-components'
 
 export const StyledLottie = styled(Lottie)`
-  width: 500px;
-  height: 500px;
+  
 `
 
 export const Container = styled.div`

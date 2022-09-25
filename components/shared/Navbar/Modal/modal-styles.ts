@@ -13,7 +13,6 @@ export const StyledModal = styled(motion.header)`
     z-index: 10;
     inset: 0;
     display: grid;
-  background-color: #f4f4f7;
 
   }
 `
