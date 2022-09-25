@@ -10,6 +10,7 @@ import {
 } from './Login-styles'
 import { onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth'
 
+
 import Cookies from 'js-cookie'
 import { FullLogo } from 'components/shared/FullLogo/FullLogo'
 import Link from 'next/link'
@@ -39,18 +40,21 @@ export const Login = () => {
     },
   })
 
-  const handleFormSubmit = (values: values) => {
-    signInWithEmailAndPassword(auth, values.email, values.password)
-      .then((userCredential: any) => {
-        const token = userCredential.user.accessToken
-        Cookies.set('token', token ? token : '')
-        router.push('/')
-      })
-      .catch((error) => {
-        const errorCode = error.code
-        const errorMessage = error.message
-        console.log({ errorCode, errorMessage })
-      })
+
+  console.log(auth)
+
+  const handleFormSubmit = async (values: values) => {
+    try {
+      const { user }: any = await signInWithEmailAndPassword(auth, values.email, values.password)
+      
+      const token = user.accessToken
+
+      Cookies.set('token', token ? token : '')
+      router.push('/')
+      
+    } catch ({ code, message }) {
+      console.log({ code, message })
+    }
   }
 
   useEffect(() => {
@@ -65,6 +69,7 @@ export const Login = () => {
 
     return () => {
       unsubscribe()
+
     }
   }, [])
 
@@ -98,3 +103,5 @@ export const Login = () => {
     </Container>
   )
 }
+
+

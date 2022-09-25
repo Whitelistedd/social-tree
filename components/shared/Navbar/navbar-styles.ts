@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { motion } from 'framer-motion'
 import styled from 'styled-components'
 
 export const StyledNavbar = styled.header`
@@ -82,7 +83,7 @@ export const RegisterButton = styled.button`
   }
 `
 
-export const Logo = styled(Image)`
+export const Logo = styled(motion(Image))`
   &:hover {
     cursor: pointer;
   }

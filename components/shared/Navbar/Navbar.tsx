@@ -8,32 +8,38 @@ import {
   RegisterButton,
   StyledNavbar,
 } from './navbar-styles'
+import React, { useEffect } from 'react'
 
 import { AnimatePresence } from 'framer-motion'
 import { Burger } from '@mantine/core'
+import Cookies from 'js-cookie'
 import Link from 'next/link'
 import LogoSrc from '/public/logo.svg'
 import Modal from './Modal/Modal'
 import NavItems from './NavItems/NavItems'
-import React from 'react'
+import { onAuthStateChanged } from 'firebase/auth'
 import { useState } from 'react'
 
 const Navbar = () => {
   const [open, setOpen] = useState(false)
   const title = open ? 'Close navigation' : 'Open navigation'
-
   const handleNavClick = () => setOpen(false);
 
-  const buttons = (
+  let buttons = (
+
     <>
       <Link href="/signup">
-        <RegisterButton onClick={() => setOpen(false)}>Create Account</RegisterButton>
+        <RegisterButton onClick={handleNavClick}>Create Account</RegisterButton>
       </Link>
       <Link href="/login">
-        <LoginButton onClick={() => setOpen(false)}>Sign in</LoginButton>
+        <LoginButton onClick={handleNavClick}>Sign in</LoginButton>
       </Link>
     </>
+
   )
+
+
+
 
   return (
     <>

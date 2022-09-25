@@ -11,6 +11,7 @@ export const NewAccount = styled.span`
   }
 `
 
+
 export const StyledButton = styled(Button)<{ theme: themeType; type: string }>`
   background-color: ${({ theme }) => theme.primary};
   color: black;

@@ -1,19 +1,19 @@
-import { GlobalStyle } from '../globa-styles/GlobalStyle'
-import Navbar from 'components/shared/Navbar/Navbar'
+import {Footer, Navbar} from 'components/shared'
+
 import React from 'react'
 
 interface PropTypes {
   children: React.ReactNode
 }
 
-const LayoutWrapper = ({ children }: PropTypes) => {
+const BasicLayout = ({ children }: PropTypes) => {
   return (
     <>
-      <GlobalStyle />
       <Navbar />
       {children}
+      <Footer />
     </>
   )
 }
 
-export default LayoutWrapper
+export default BasicLayout

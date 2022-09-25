@@ -1,11 +1,11 @@
+
 import LayoutWrapper from 'layout/Layout'
 import type { NextPage } from 'next'
 
 const Home: NextPage = () => {
   return (
     <LayoutWrapper>
-      <main></main>
-      <footer></footer>
+      <h1>Home Page</h1>
     </LayoutWrapper>
   )
 }

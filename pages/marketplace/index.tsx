@@ -1,10 +1,12 @@
+import BasicLayout from 'layout/Layout'
+import type { NextPage } from 'next'
 import React from 'react'
 
-const marketplacePage = () => {
+const marketplacePage: NextPage = () => {
   return (
-    <div>
+    <BasicLayout>
         <h1>marketplace</h1>
-    </div>
+    </BasicLayout>
   )
 }
 
