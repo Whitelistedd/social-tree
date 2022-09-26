@@ -26,7 +26,9 @@ import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth'
 
 type values = {
   email: string
+  username: string
   password: string
+  confirmPassword: string
 }
 
 const Login = () => {
