@@ -4,31 +4,37 @@ import {
   LoginFormContainer,
   NewAccount,
   StyledButton,
+  StyledImage,
   StyledTextInput,
   Title,
   Wrap,
 } from './Login-styles'
-import { onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth'
 
 import Cookies from 'js-cookie'
 import { FullLogo } from 'components/shared/FullLogo/FullLogo'
+import Image from 'next/image'
 import Link from 'next/link'
 import { PasswordInput } from '@mantine/core'
+import SideImage from 'public/assets/images/LoginImage.svg'
 import { SocialLoginButtons } from 'components/shared/SocialLoginButtons/SocialLoginButtons'
 import { Splitter } from 'components/shared/Splitter/Splitter'
 import { auth } from 'lib/clientApp'
 import { useEffect } from 'react'
 import { useForm } from '@mantine/form'
 import { useRouter } from 'next/router'
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth'
 
 type values = {
   email: string
   password: string
 }
 
-export const Login = () => {
+const Login = () => {
   const router = useRouter()
+  const [signInWithEmailAndPassword, user, loading, error] =
+    useSignInWithEmailAndPassword(auth)
   const form = useForm({
+    validateInputOnChange: true,
     initialValues: {
       email: '',
       password: '',
@@ -36,37 +42,35 @@ export const Login = () => {
 
     validate: {
       email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
+      password: (value) =>
+        value.length < 9
+          ? 'password length should be atleast 10 characters'
+          : null,
     },
   })
 
-  const handleFormSubmit = (values: values) => {
-    signInWithEmailAndPassword(auth, values.email, values.password)
-      .then((userCredential: any) => {
-        const token = userCredential.user.accessToken
-        Cookies.set('token', token ? token : '')
-        router.push('/')
-      })
-      .catch((error) => {
-        const errorCode = error.code
-        const errorMessage = error.message
-        console.log({ errorCode, errorMessage })
-      })
-  }
+  console.log(auth)
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        router.push('/')
+  const handleFormSubmit = async (values: values) => {
+    try {
+      if (values.password === values.confirmPassword) {
+        signInWithEmailAndPassword(values.email, values.password)
+        if (user) {
+          console.log(document)
+          const token = user.user?.accessToken
+          Cookies.set('token', token ? token : '')
+          router.push('/')
+        }
       } else {
-        // User is signed out
-        // ...
+        form.setErrors({
+          password: 'password doesnt match',
+          confirmPassword: 'password doesnt match',
+        })
       }
-    })
-
-    return () => {
-      unsubscribe()
+    } catch ({ code, message }) {
+      console.log({ code, message })
     }
-  }, [])
+  }
 
   return (
     <Container>
@@ -76,7 +80,10 @@ export const Login = () => {
         <LoginFormContainer>
           <SocialLoginButtons />
           <Splitter />
-          <Form onSubmit={form.onSubmit((values) => handleFormSubmit(values))}>
+          <Form
+            onSubmit={form.onSubmit((values) => handleFormSubmit(values))}
+            noValidate
+          >
             <StyledTextInput
               required
               label="Email Address"
@@ -95,6 +102,11 @@ export const Login = () => {
           </Form>
         </LoginFormContainer>
       </Wrap>
+      <StyledImage>
+        <Image src={SideImage} layout="responsive" width="1000" height="1000" />
+      </StyledImage>
     </Container>
   )
 }
+
+export default Login

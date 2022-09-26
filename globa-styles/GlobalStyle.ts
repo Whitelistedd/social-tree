@@ -17,6 +17,9 @@ export const GlobalStyle = createGlobalStyle`
       cursor: pointer;
     }
 
-
+    #_next {
+      width: max-content;
+      height: max-content;
+    }
 `;
 
