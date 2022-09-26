@@ -8,23 +8,17 @@ import {
   Title,
   Wrap,
 } from './Login-styles'
+import { auth, handleFormSubmit } from 'lib/firebase'
 import { onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth'
 
-import Cookies from 'js-cookie'
 import { FullLogo } from 'components/shared/FullLogo/FullLogo'
 import Link from 'next/link'
 import { PasswordInput } from '@mantine/core'
 import { SocialLoginButtons } from 'components/shared/SocialLoginButtons/SocialLoginButtons'
 import { Splitter } from 'components/shared/Splitter/Splitter'
-import { auth } from 'lib/clientApp'
 import { useEffect } from 'react'
 import { useForm } from '@mantine/form'
 import { useRouter } from 'next/router'
-
-type values = {
-  email: string
-  password: string
-}
 
 const Login = () => {
   const router = useRouter()
@@ -42,21 +36,8 @@ const Login = () => {
   })
 
 
-  console.log(auth)
 
-  const handleFormSubmit = async (values: values) => {
-    try {
-      const { user }: any = await signInWithEmailAndPassword(auth, values.email, values.password)
 
-      const token = user.accessToken
-
-      Cookies.set('token', token ? token : '')
-      router.push('/')
-
-    } catch ({ code, message }) {
-      console.log({ code, message })
-    }
-  }
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -66,6 +47,8 @@ const Login = () => {
       //   // User is signed out
       //   // ...
       // }
+      console.log(user);
+      
     })
 
     return () => {
@@ -85,7 +68,7 @@ const Login = () => {
         <LoginFormContainer>
           <SocialLoginButtons />
           <Splitter />
-          <Form onSubmit={form.onSubmit((values) => handleFormSubmit(values))} noValidate>
+          <Form onSubmit={form.onSubmit((values) => handleFormSubmit({ ...values, router }))} noValidate>
             <StyledTextInput
               required
               label="Email Address"

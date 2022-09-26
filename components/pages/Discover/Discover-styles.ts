@@ -17,7 +17,6 @@ export const Details = styled.div`
 `
 
 export const StyledImage = styled.div`
-  width: 50vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -36,6 +35,5 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   width: 100vw;
-  width: 50vw;
   margin: auto;
 `

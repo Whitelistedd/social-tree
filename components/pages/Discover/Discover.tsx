@@ -24,7 +24,6 @@ export const Discover = () => {
         <StyledImage>
           <Image
             src={Discover1SRC}
-            layout="responsive"
             width="500"
             height="500"
           />

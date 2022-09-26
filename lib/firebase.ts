@@ -2,7 +2,10 @@ import 'firebase/auth'
 import 'firebase/firestore'
 import 'firebase/storage'
 
-import { getAuth } from 'firebase/auth'
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+
+import Cookies from 'js-cookie'
+import { NextRouter } from 'next/router'
 import { getFirestore } from 'firebase/firestore'
 import { initializeApp } from 'firebase/app'
 
@@ -21,5 +24,28 @@ const app = initializeApp(clientCredentials)
 export const db = getFirestore(app)
 
 export const auth = getAuth(app)
+
+type values = {
+  email: string
+  password: string
+  router: NextRouter
+}
+
+
+export const handleFormSubmit = async ({ email, password, router }: values) => {
+  try {
+    const { user }: any = await signInWithEmailAndPassword(auth, email, password)
+
+    const token = user.accessToken
+
+    Cookies.set('token', token ? token : '')
+    router.push('/')
+
+  } catch ({ code, message }) {
+    console.log({ code, message })
+  }
+}
+
+
 
 export default app

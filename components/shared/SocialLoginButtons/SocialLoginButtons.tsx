@@ -3,7 +3,7 @@ import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 
 import Cookies from 'js-cookie'
 import GoogleIcon from 'public/assets/images/google.svg'
-import { auth } from 'lib/clientApp'
+import { auth } from 'lib/firebase'
 import { useRouter } from 'next/router'
 
 export const SocialLoginButtons: React.FC = () => {
