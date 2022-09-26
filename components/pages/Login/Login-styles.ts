@@ -68,6 +68,7 @@ export const Wrap = styled.div`
   justify-content: center;
   align-items: center;
   gap: 1rem;
+  padding: 1rem;
 
 
   @media (max-width: 1000px){
