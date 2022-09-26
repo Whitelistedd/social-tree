@@ -27,7 +27,7 @@ export const Wrap = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 50px;
+  gap: 1rem;
   flex-wrap: wrap;
 `
 
@@ -35,5 +35,7 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 80vh;
+  width: 100vw;
+  width: 50vw;
+  margin: auto;
 `

@@ -1,13 +1,13 @@
 import {
   Container,
   Form,
-  LoginFormContainer,
   NewAccount,
   StyledButton,
   StyledTextInput,
   Title,
   Wrap,
 } from '../Login/Login-styles'
+import { SignUpForm, SignUpFormContainer } from './Signup-styles'
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
@@ -31,9 +31,12 @@ type values = {
   confirmPassword: string
 }
 
+
+
 export const Signup = () => {
   const router = useRouter()
   const form = useForm({
+    validateInputOnChange: true,
     initialValues: {
       email: '',
       username: '',
@@ -42,28 +45,32 @@ export const Signup = () => {
     },
 
     validate: {
+      username: (value) => (value.length < 4 ? "username should be atleast 4 characters" : null),
       email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
+      password: (value) => (value.length < 9 ? 'password should be atleast 10 characters' : null),
+      confirmPassword: (value, values) => value !== values.password ? 'Passwords did not match' : null,
+
     },
   })
 
-  const handleFormSubmit = (values: values) => {
-    if (values.password === values.confirmPassword) {
-      createUserWithEmailAndPassword(auth, values.email, values.password)
-        .then((userCredential: any) => {
-          const token = userCredential.user.accessToken
-          Cookies.set('token', token ? token : '')
-          router.push('/')
-        })
-        .catch((error) => {
-          const errorCode = error.code
-          const errorMessage = error.message
-          console.log({ errorCode, errorMessage })
-        })
+  const handleFormSubmit = async (values: values) => {
+    try {
+      if (values.password === values.confirmPassword) {
+        const { user }: any = await createUserWithEmailAndPassword(auth, values.email, values.password)
+        const token = user.accessToken
+        Cookies.set('token', token ? token : '')
+        router.push('/')
+      } 
+
+      form.setErrors({
+        password: 'password doesnt match',
+        confirmPassword: 'password doesnt match',
+      })
+
+    } catch ({ code, message }) {
+      console.log({ code, message })
+
     }
-    form.setErrors({
-      password: 'password doesnt match',
-      confirmPassword: 'password doesnt match',
-    })
   }
 
   useEffect(() => {
@@ -86,10 +93,10 @@ export const Signup = () => {
       <Wrap>
         <FullLogo />
         <Title>Create your account</Title>
-        <LoginFormContainer>
+        <SignUpFormContainer>
           <SocialLoginButtons />
           <Splitter />
-          <Form onSubmit={form.onSubmit((values) => handleFormSubmit(values))}>
+          <SignUpForm onSubmit={form.onSubmit((values) => handleFormSubmit(values))} noValidate>
             <StyledTextInput
               required
               label="Username"
@@ -111,12 +118,12 @@ export const Signup = () => {
               {...form.getInputProps('confirmPassword')}
             />
             {/* @ts-ignore */}
-            <StyledButton type="submit">Login</StyledButton>
+            <StyledButton type="submit">Sign Up</StyledButton>
             <NewAccount>
-              Do you have an account? <Link href={'/login'}>Login</Link>
+              Already have an account? <Link href={'/login'}>Login</Link>
             </NewAccount>
-          </Form>
-        </LoginFormContainer>
+          </SignUpForm>
+        </SignUpFormContainer>
       </Wrap>
     </Container>
   )

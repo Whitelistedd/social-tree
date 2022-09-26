@@ -26,7 +26,7 @@ type values = {
   password: string
 }
 
-export const Login = () => {
+const Login = () => {
   const router = useRouter()
   const form = useForm({
     validateInputOnChange: true,
@@ -109,3 +109,4 @@ export const Login = () => {
 }
 
 
+export default Login;
