@@ -1,27 +1,34 @@
 import { Container, Icon, Name } from './SocialLoginButtons-styles'
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
+import { auth, db } from 'lib/clientApp'
+import { doc, setDoc } from 'firebase/firestore'
 
 import Cookies from 'js-cookie'
 import GoogleIcon from 'public/assets/images/google.svg'
-import { auth } from 'lib/clientApp'
 import { useRouter } from 'next/router'
+import { useSignInWithGoogle } from 'react-firebase-hooks/auth'
 
 export const SocialLoginButtons: React.FC = () => {
-  const provider = new GoogleAuthProvider()
+  const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth)
   const router = useRouter()
 
   const handleLoginWithGoogle = async () => {
-    const { user }: any = await signInWithPopup(auth, provider)
-      const token = user.accessToken
+    await signInWithGoogle()
+    if (user) {
+      const usersRef = doc(db, 'users', user.user.uid)
+      const data = {
+        username: user.user.displayName,
+      }
+      const document = await setDoc(usersRef, data)
+      const token = user.user?.accessToken
       Cookies.set('token', token ? token : '')
-
-      router.push('/')
     }
 
+    router.push('/')
+  }
 
   return (
     <>
-      <Container onClick={() => handleLoginWithGoogle()}>
+      <Container loading={loading} onClick={() => handleLoginWithGoogle()}>
         <Icon src={GoogleIcon} width="28" height="28" />
         <Name>Google</Name>
       </Container>
