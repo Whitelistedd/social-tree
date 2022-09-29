@@ -7,6 +7,9 @@ export const LinksContainer = styled.div`
   gap: 30px;
   max-width: 100%;
   padding: 0px 60px;
+  @media only screen and (max-width: 550px) {
+    padding: 0px 10px;
+  }
 `
 
 export const Wrap = styled.div`
@@ -18,7 +21,7 @@ export const Wrap = styled.div`
 `
 
 export const Container = styled.div<{ halfBg: boolean }>`
-  width: 100vw;
+  width: 100%;
   min-height: 100vh;
   ${({ bgURL }) => (bgURL ? `background: url(${bgURL});` : ``)}
   background-color: #242424;

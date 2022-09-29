@@ -15,13 +15,13 @@ export const User = () => {
   const username = router.query.user
 
   const [socialMedias, setSocialMedias] = useState([
-    { type: 'discord', name: 'Kunai#5905' },
-    { type: 'email', name: 'Kunai@gmail.com' },
+    { type: 'discord', name: '.Volxen#1007' },
+    { type: 'email', name: 'random@gmail.com' },
   ])
 
   const [miniSocialMedias, setMiniSocialMedias] = useState([
     { type: 'youtube', link: 'https://youtube.com/' },
-    { type: 'youtube', link: 'https://youtube.com/' },
+    { type: 'tiktok', link: 'https://tiktok.com/' },
   ])
 
   const [links, setLinks] = useState([
