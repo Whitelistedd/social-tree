@@ -30,41 +30,6 @@ export const NewAccount = styled.span`
   }
 `
 
-export const StyledButton = styled(Button)<{
-  theme: themeType
-  type: string
-  error: boolean
-  loadingState: boolean
-}>`
-  background-color: ${({ theme }) => theme.primary};
-  color: black;
-  font-size: 1.2rem;
-  color: white;
-  min-height: 40px;
-  border: 1px solid ${({ theme }) => theme.primary};
-  transition: 200ms ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  ${({ loadingState }) =>
-    loadingState &&
-    `
-      background-color: #E0E5E7 !important;
-    `}
-
-  ${({ error }) =>
-    error &&
-    `
-    border: none;
-      background-color: #E64E35 !important;
-    `}
-
-  &:hover {
-    background-color: ${({ theme }) => theme.secondary};
-    color: ${({ theme }) => theme.primary};
-  }
-`
-
 export const StyledTextInput = styled(TextInput)`
   label {
     font-size: 0.9rem;

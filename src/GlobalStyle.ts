@@ -21,4 +21,6 @@ export const GlobalStyle = createGlobalStyle`
     font-family: 'League Spartan', sans-serif;
   }
 
+  
+
 `
