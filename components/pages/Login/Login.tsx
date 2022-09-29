@@ -3,14 +3,17 @@ import {
   Form,
   LoginFormContainer,
   NewAccount,
-  StyledButton,
   StyledImage,
   StyledTextInput,
   Title,
   Wrap,
 } from './Login-styles'
+import {
+  useAuthState,
+  useSignInWithEmailAndPassword,
+} from 'react-firebase-hooks/auth'
 
-import Cookies from 'js-cookie'
+import { Button } from 'components/shared/Button/Button'
 import { FullLogo } from 'components/shared/FullLogo/FullLogo'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -22,18 +25,16 @@ import { auth } from 'lib/clientApp'
 import { useEffect } from 'react'
 import { useForm } from '@mantine/form'
 import { useRouter } from 'next/router'
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth'
 
 type values = {
   email: string
-  username: string
   password: string
-  confirmPassword: string
 }
 
 const Login = () => {
   const router = useRouter()
-  const [signInWithEmailAndPassword, user, loading, error] =
+  const [user] = useAuthState(auth)
+  const [signInWithEmailAndPassword, , loading, error] =
     useSignInWithEmailAndPassword(auth)
   const form = useForm({
     validateInputOnChange: true,
@@ -51,28 +52,22 @@ const Login = () => {
     },
   })
 
-  console.log(auth)
-
   const handleFormSubmit = async (values: values) => {
     try {
-      if (values.password === values.confirmPassword) {
-        signInWithEmailAndPassword(values.email, values.password)
-        if (user) {
-          console.log(document)
-          const token = user.user?.accessToken
-          Cookies.set('token', token ? token : '')
-          router.push('/')
-        }
-      } else {
-        form.setErrors({
-          password: 'password doesnt match',
-          confirmPassword: 'password doesnt match',
-        })
+      signInWithEmailAndPassword(values.email, values.password)
+      if (user) {
+        router.push('/')
       }
     } catch ({ code, message }) {
       console.log({ code, message })
     }
   }
+
+  useEffect(() => {
+    if (user || auth.currentUser) {
+      router.push('/')
+    }
+  }, [user])
 
   return (
     <Container>
@@ -96,8 +91,11 @@ const Login = () => {
               label="Password"
               {...form.getInputProps('password')}
             />
-            {/* @ts-ignore */}
-            <StyledButton type="submit">Login</StyledButton>
+            <Button
+              error={error ? true : false}
+              loading={loading}
+              text="Sign up"
+            />
             <NewAccount>
               Don't have an account? <Link href={'/signup'}>Signup</Link>
             </NewAccount>

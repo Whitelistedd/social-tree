@@ -2,27 +2,27 @@ import {
   Container,
   Form,
   NewAccount,
-  StyledButton,
   StyledImage,
   StyledTextInput,
   Title,
   Wrap,
 } from '../Login/Login-styles'
-import { SignUpForm, SignUpFormContainer, StyledLottie } from './Signup-styles'
+import { SignUpForm, SignUpFormContainer } from './Signup-styles'
 import { auth, db } from 'lib/clientApp'
-import { doc, setDoc } from 'firebase/firestore'
+import { doc, getDoc, setDoc } from 'firebase/firestore'
+import {
+  useAuthState,
+  useCreateUserWithEmailAndPassword,
+} from 'react-firebase-hooks/auth'
 
-import Cookies from 'js-cookie'
+import { Button } from 'components/shared/Button/Button'
 import { FullLogo } from 'components/shared/FullLogo/FullLogo'
 import Image from 'next/image'
 import Link from 'next/link'
-import Loading from 'public/assets/lotties/loading.json'
 import { PasswordInput } from '@mantine/core'
 import SideImage from 'public/assets/images/LoginImage.svg'
 import { SocialLoginButtons } from 'components/shared/SocialLoginButtons/SocialLoginButtons'
 import { Splitter } from 'components/shared/Splitter/Splitter'
-import { onAuthStateChanged } from 'firebase/auth'
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth'
 import { useEffect } from 'react'
 import { useForm } from '@mantine/form'
 import { useRouter } from 'next/router'
@@ -36,7 +36,8 @@ type values = {
 
 export const Signup = () => {
   const router = useRouter()
-  const [createUserWithEmailAndPassword, user, loading, error] =
+  const [user] = useAuthState(auth)
+  const [createUserWithEmailAndPassword, , loading, error] =
     useCreateUserWithEmailAndPassword(auth)
   const form = useForm({
     validateInputOnChange: true,
@@ -58,30 +59,61 @@ export const Signup = () => {
     },
   })
 
+  const createUserData = async () => {
+    console.log(user)
+    try {
+      if (user) {
+        const username = await form.values.username
+        const usersRef = doc(db, 'users', user.uid)
+        const usernamesRef = doc(db, 'usernames', username)
+        const data = {
+          username: username,
+        }
+        const usernameData = {
+          uid: user.uid,
+        }
+        console.log(usernamesRef, usernameData)
+        console.log(usersRef, data)
+        await setDoc(usernamesRef, usernameData)
+        await getDoc(usernamesRef).then((res) => console.log(res))
+        await setDoc(usersRef, data)
+        router.push('/')
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   const handleFormSubmit = async (values: values) => {
     try {
       if (values.password === values.confirmPassword) {
         await createUserWithEmailAndPassword(values.email, values.password)
-        if (user) {
-          const usersRef = doc(db, 'users', user.user.uid)
-          const data = {
-            username: values.username,
-          }
-          const document = await setDoc(usersRef, data)
-          const token = user.user?.accessToken
-          Cookies.set('token', token ? token : '')
-          router.push('/')
-        }
+        createUserData()
       } else {
         form.setErrors({
           password: 'password doesnt match',
           confirmPassword: 'password doesnt match',
         })
       }
-    } catch ({ code, message }) {
-      console.log({ code, message })
+    } catch (err) {
+      console.log({ err })
     }
   }
+
+  useEffect(() => {
+    if (error?.code === 'auth/email-already-in-use') {
+      form.setErrors({
+        email: 'Email Address already in use',
+      })
+    }
+    const redirectUser = async () => {
+      if (user || auth.currentUser) {
+        await createUserData()
+        router.push('/')
+      }
+    }
+    redirectUser()
+  }, [user, error])
 
   return (
     <Container>
@@ -116,15 +148,11 @@ export const Signup = () => {
               {...form.getInputProps('confirmPassword')}
             />
             {/* @ts-ignore */}
-            <StyledButton error={error} loadingState={loading} type="submit">
-              {loading ? (
-                <StyledLottie animationData={Loading} />
-              ) : error ? (
-                'Something went wrong'
-              ) : (
-                'Sign Up'
-              )}
-            </StyledButton>
+            <Button
+              text={'Sign Up'}
+              error={error ? true : false}
+              loading={loading}
+            />
             <NewAccount>
               Already have an account? <Link href={'/login'}>Login</Link>
             </NewAccount>

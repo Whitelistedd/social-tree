@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 
 import type { AppProps } from 'next/app'
 import { GlobalStyle } from 'src/GlobalStyle'
+import Head from 'next/head'
 import { Loading } from 'components/shared/Loading/Loading'
 import { ThemeProvider } from 'styled-components'
 import { themes } from 'src/theme'
@@ -12,8 +13,10 @@ function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
 
   useEffect(() => {
-    const handleStart = (url: string) => url !== router.asPath && setLoading(true)
-    const handleComplete = (url: string) => url === router.asPath && setLoading(false)
+    const handleStart = (url: string) =>
+      url !== router.asPath && setLoading(true)
+    const handleComplete = (url: string) =>
+      url === router.asPath && setLoading(false)
 
     router.events.on('routeChangeStart', handleStart)
     router.events.on('routeChangeComplete', handleComplete)
@@ -27,11 +30,16 @@ function MyApp({ Component, pageProps }: AppProps) {
   })
 
   return (
-    <ThemeProvider theme={themes.light}>
-      {loading && <Loading />}
-      <GlobalStyle />
-      <Component {...pageProps} />
-    </ThemeProvider>
+    <>
+      <Head>
+        <link href="logo.svg" rel="shortcut icon" type="image/x-icon" />
+      </Head>
+      <ThemeProvider theme={themes.light}>
+        {loading && <Loading />}
+        <GlobalStyle />
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </>
   )
 }
 

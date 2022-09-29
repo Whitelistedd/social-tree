@@ -3,7 +3,6 @@ import {
   Form,
   LoginFormContainer,
   NewAccount,
-  StyledButton,
   StyledTextInput,
   Title,
   Wrap,
@@ -16,9 +15,4 @@ export const SignUpFormContainer = styled(LoginFormContainer)``
 
 export const SignUpForm = styled(Form)`
   gap: 0.5rem;
-`
-
-export const StyledLottie = styled(Lottie)`
-  width: 100px;
-  height: 100px;
 `
