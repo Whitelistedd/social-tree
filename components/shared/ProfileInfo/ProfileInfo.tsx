@@ -2,6 +2,7 @@ import {
   BackgroundImage,
   Container,
   MiniLinksContainer,
+  ProfileDesc,
   ProfileImage,
   SocialMediaBox,
   SocialMediaBoxes,
@@ -38,14 +39,17 @@ export const ProfileInfo = ({
 }: ProfileInfoProps) => {
   return (
     <Container>
-      <BackgroundImage>
-        <Image layout="responsive" src={bgURL} width={'800'} height="200" />
-      </BackgroundImage>
-      <Wrap>
+      {bgURL && (
+        <BackgroundImage>
+          <Image layout="responsive" src={bgURL} width={'800'} height="200" />
+        </BackgroundImage>
+      )}
+      <Wrap bgURL={bgURL}>
         <ProfileImage>
           <Image src={profileImage} height="200" width="200" />
         </ProfileImage>
         <Username>{username}</Username>
+        <ProfileDesc>Twitch Streamer</ProfileDesc>
         <SocialMediaBoxes>
           {socialMedias.map((link) => (
             <SocialMediaBox>

@@ -12,6 +12,7 @@ import React, { useEffect } from 'react'
 
 import { AnimatePresence } from 'framer-motion'
 import { Burger } from '@mantine/core'
+import { Button } from '../Button/Button'
 import Cookies from 'js-cookie'
 import Link from 'next/link'
 import LogoSrc from '/public/logo.svg'
@@ -23,23 +24,20 @@ import { useState } from 'react'
 const Navbar = () => {
   const [open, setOpen] = useState(false)
   const title = open ? 'Close navigation' : 'Open navigation'
-  const handleNavClick = () => setOpen(false);
+  const handleNavClick = () => setOpen(false)
 
   let buttons = (
-
     <>
       <Link href="/signup">
-        <RegisterButton onClick={handleNavClick}>Create Account</RegisterButton>
+        <RegisterButton onClick={() => handleNavClick()}>
+          Create Account
+        </RegisterButton>
       </Link>
       <Link href="/login">
-        <LoginButton onClick={handleNavClick}>Sign in</LoginButton>
+        <LoginButton onClick={() => handleNavClick()}>Sign in</LoginButton>
       </Link>
     </>
-
   )
-
-
-
 
   return (
     <>
@@ -62,7 +60,9 @@ const Navbar = () => {
           </NavItemsWrapper>
         </NavContainer>
       </StyledNavbar>
-      <AnimatePresence>{open && <Modal setOpen={setOpen} buttons={buttons} />}</AnimatePresence>
+      <AnimatePresence>
+        {open && <Modal setOpen={setOpen} buttons={buttons} />}
+      </AnimatePresence>
     </>
   )
 }

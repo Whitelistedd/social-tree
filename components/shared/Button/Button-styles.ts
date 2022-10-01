@@ -8,18 +8,23 @@ export const StyledLottie = styled(Lottie)`
   height: 100px;
 `
 
-export const StyledButton = styled(Button)<{
-  theme: themeType
-  type: string
-  error: boolean
-  loadingState: boolean
-}>`
-  background-color: ${({ theme }) => theme.primary};
-  color: black;
+interface StyledButtonProps extends React.HTMLAttributes<HTMLElement> {
+  theme?: themeType
+  type?: string
+  error?: boolean
+  loadingState?: boolean
+  reverse?: boolean
+  children?: string
+}
+
+export const StyledButton = styled(Button)<StyledButtonProps>`
+  background-color: ${({ theme, reverse }) =>
+    reverse ? theme.secondary : theme.primary};
   font-size: 1.2rem;
-  color: white;
-  min-height: 40px;
-  border: 1px solid ${({ theme }) => theme.primary};
+  color: ${({ theme, reverse }) => (reverse ? theme.primary : 'white')};
+  min-height: 45px;
+  border: 1px solid
+    ${({ theme, reverse }) => (reverse ? theme.primary : theme.p)};
   transition: 200ms ease;
   display: flex;
   align-items: center;
@@ -37,9 +42,10 @@ export const StyledButton = styled(Button)<{
     background-color: #E64E35 ;
       `}
   
-    &:hover {
-    background-color: ${({ theme, error }) =>
-      error ? '#eb6066' : theme.secondary};
-    color: ${({ theme, error }) => (error ? 'white' : theme.primary)};
+  &:hover {
+    background-color: ${({ theme, reverse, error }) =>
+      error ? '#eb6066' : reverse ? theme.primary : theme.secondary};
+    color: ${({ theme, error, reverse }) =>
+      error ? 'white' : reverse ? theme.secondary : theme.primary};
   }
 `

@@ -19,8 +19,6 @@ export const SocialLoginButtons: React.FC = () => {
         username: user.user.displayName,
       }
       const document = await setDoc(usersRef, data)
-      const token = user.user?.accessToken
-      Cookies.set('token', token ? token : '')
     }
 
     router.push('/')

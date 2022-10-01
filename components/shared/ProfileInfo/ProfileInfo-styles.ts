@@ -49,10 +49,14 @@ export const SocialMediaBoxes = styled.div`
   gap: 10px;
 `
 
+export const ProfileDesc = styled.p`
+  font-size: 1.3rem;
+  color: rgba(200, 200, 200, 1);
+`
+
 export const Username = styled.p`
   font-size: 2rem;
   font-weight: 700;
-  color: white;
   text-shadow: 0px 0px 20px black;
 `
 
@@ -89,17 +93,17 @@ export const ProfileImage = styled.div`
   }
 `
 
-export const Wrap = styled.div`
+export const Wrap = styled.div<{ bgURL: string }>`
   display: flex;
   align-items: center;
   flex-direction: column;
   gap: 20px;
-  margin-top: -120px;
+  margin-top: ${({ bgURL }) => (bgURL ? -120 : 120)}px;
   @media only screen and (max-width: 974px) {
-    margin-top: -90px;
+    margin-top: ${({ bgURL }) => (bgURL ? -90 : 90)}px;
   }
   @media only screen and (max-width: 474px) {
-    margin-top: -70px;
+    margin-top: ${({ bgURL }) => (bgURL ? -70 : 70)}px;
     ${Username} {
       font-size: 1.5rem;
     }
@@ -114,4 +118,5 @@ export const Container = styled.div`
   align-items: center;
   flex-direction: column;
   gap: 20px;
+  color: white;
 `

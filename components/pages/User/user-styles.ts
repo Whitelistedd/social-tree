@@ -15,7 +15,7 @@ export const LinksContainer = styled.div`
 export const Wrap = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 50px;
+  gap: 30px;
   min-height: 100%;
   padding-bottom: 50px;
 `
