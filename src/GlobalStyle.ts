@@ -7,6 +7,10 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
   }
 
+  html,body {
+    box-sizing: border-box;
+  }
+
 
   button, input {
     border: none;

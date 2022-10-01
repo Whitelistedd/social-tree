@@ -94,7 +94,8 @@ const Login = () => {
             <Button
               error={error ? true : false}
               loading={loading}
-              text="Sign up"
+              text="Login"
+              type="submit"
             />
             <NewAccount>
               Don't have an account? <Link href={'/signup'}>Signup</Link>

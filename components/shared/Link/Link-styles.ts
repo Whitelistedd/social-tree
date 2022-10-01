@@ -5,7 +5,7 @@ import Image from 'next/image'
 
 export const RightArrow = styled(Arrow)`
   transform: rotate(90deg);
-  margin-right: 20px;
+  margin-right: 10px;
   transition: 200ms ease;
   width: 20px;
   height: 20px;
@@ -93,7 +93,7 @@ export const LinkBox = styled.div`
       transform: translateY(-5px);
     }
     ${RightArrow} {
-      margin-right: 10px;
+      margin-right: 5px;
     }
     cursor: pointer;
   }

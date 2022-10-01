@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { StyledButton } from '../Button/Button-styles'
 import { motion } from 'framer-motion'
 import styled from 'styled-components'
 
@@ -45,16 +46,13 @@ export const Dot = styled.span`
   margin-right: 1rem;
 `
 
-export const LoginButton = styled.button`
-  height: auto;
-  padding: 15px 17px;
-  font-size: 14px;
+export const LoginButton = styled(StyledButton)`
+  font-size: 0.9rem !important;
   border: 1px solid #3673fc;
+  font-weight: 300;
   background-color: transparent;
-  box-shadow: none;
   color: #3673fc;
   border-radius: 3px;
-  font-family: 'League Spartan', sans-serif;
 
   @media (max-width: 1000px) {
     width: 300px;
@@ -62,25 +60,9 @@ export const LoginButton = styled.button`
   }
 `
 
-export const RegisterButton = styled.button`
-  padding: 15px 17px;
-  display: flex;
-  overflow: visible;
-  justify-content: center;
-  align-items: center;
-  background-color: #3673fc;
+export const RegisterButton = styled(LoginButton)`
   box-shadow: 0 14px 30px -5px rgba(0, 0, 0, 0.13);
   color: #fff;
-  text-align: center;
-  padding: 1rem 1.4rem;
-  border-radius: 3px;
-  border: 1px solid transparent;
-  font-family: 'League Spartan', sans-serif;
-
-  @media (max-width: 1000px) {
-    width: 300px;
-    font-size: 20px;
-  }
 `
 
 export const Logo = styled(motion(Image))`

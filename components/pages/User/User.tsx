@@ -15,33 +15,42 @@ export const User = () => {
   const username = router.query.user
 
   const [socialMedias, setSocialMedias] = useState([
-    { type: 'discord', name: 'Kunai#5905' },
-    { type: 'email', name: 'Kunai@gmail.com' },
+    { type: 'discord', name: 'Discord' },
+    { type: 'email', name: 'Email' },
   ])
 
   const [miniSocialMedias, setMiniSocialMedias] = useState([
     { type: 'youtube', link: 'https://youtube.com/' },
-    { type: 'youtube', link: 'https://youtube.com/' },
+    { type: 'tiktok', link: 'https://tiktok.com/' },
+    { type: 'instagram', link: 'https://tiktok.com/' },
+    { type: 'telegram', link: 'https://tiktok.com/' },
+    { type: 'twitter', link: 'https://tiktok.com/' },
   ])
 
   const [links, setLinks] = useState([
     {
-      type: 'discord',
+      type: 'twitch',
       link: 'https://discord.com/invite/kunaimp',
-      title: 'Marketplace',
-      subTitle: '.gg kunai',
+      title: 'Twitch',
+      subTitle: 'Twitch.tv',
     },
     {
-      type: 'discord',
+      type: 'snapchat',
       link: 'https://discord.com/invite/kunaimp',
-      title: 'Marketplace',
-      subTitle: '.gg kunai',
+      title: 'Snapchat',
+      subTitle: 'Snapchat.com',
     },
     {
-      type: 'discord',
+      type: 'twitter',
       link: 'https://discord.com/invite/kunaimp',
-      title: 'Marketplace',
-      subTitle: '.gg kunai',
+      title: 'Twitter',
+      subTitle: 'Twitter.com',
+    },
+    {
+      type: 'youtube',
+      link: 'https://discord.com/invite/kunaimp',
+      title: 'Youtube',
+      subTitle: 'Youtube.com',
     },
   ])
 
@@ -53,12 +62,10 @@ export const User = () => {
       <Wrap>
         <ProfileInfo
           miniSocialMedias={miniSocialMedias}
-          bgURL="https://cdx.solo.to/user/bg/62a21d5c2732c5_70224388.jpg"
+          bgURL={''}
           username={username ? `${username}` : ''}
           socialMedias={socialMedias}
-          profileImage={
-            'https://cdx.solo.to/user/a/6303f3dc8425b3_64291258.jpg'
-          }
+          profileImage={'https://i.imgur.com/yIrcTos.jpg'}
         />
         <LinksContainer>
           {links.map((link, index) => (
