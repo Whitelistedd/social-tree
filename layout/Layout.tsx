@@ -1,4 +1,5 @@
-import {Footer, Navbar} from 'components/shared'
+import { Container, Wrap } from './BasicLayout-styles'
+import { Footer, Navbar } from 'components/shared'
 
 import React from 'react'
 
@@ -8,11 +9,13 @@ interface PropTypes {
 
 const BasicLayout = ({ children }: PropTypes) => {
   return (
-    <>
-      <Navbar />
-      {children}
-      <Footer />
-    </>
+    <Container>
+      <Wrap>
+        <Navbar />
+        {children}
+        <Footer />
+      </Wrap>
+    </Container>
   )
 }
 

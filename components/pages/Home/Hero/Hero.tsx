@@ -9,6 +9,7 @@ import {
   UsernameInput,
 } from './Hero-styles'
 
+import Image from 'next/image'
 import { useState } from 'react'
 
 export const Hero = () => {
@@ -35,11 +36,22 @@ export const Hero = () => {
         <ClaimUsername reverse>Claim Your Username</ClaimUsername>
       </CreateUserContainer>
       <Images>
-        <PhoneImage
-          src={'https://i.imgur.com/joJwtNP.png'}
-          width="274"
-          height="616"
-        />
+        <PhoneImage>
+          <Image
+            layout="responsive"
+            src={'https://i.imgur.com/joJwtNP.png'}
+            width="274"
+            height="616"
+          />
+        </PhoneImage>
+        <PhoneImage>
+          <Image
+            layout="responsive"
+            src={'https://i.imgur.com/joJwtNP.png'}
+            width="274"
+            height="616"
+          />
+        </PhoneImage>
       </Images>
     </Container>
   )

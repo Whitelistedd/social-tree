@@ -18,13 +18,12 @@ interface StyledButtonProps extends React.HTMLAttributes<HTMLElement> {
 }
 
 export const StyledButton = styled(Button)<StyledButtonProps>`
-  background-color: ${({ theme, reverse }) =>
+  background: ${({ theme, reverse }) =>
     reverse ? theme.secondary : theme.primary};
   font-size: 1.2rem;
-  color: ${({ theme, reverse }) => (reverse ? theme.primary : 'white')};
+  color: ${({ theme, reverse }) => (reverse ? theme.primary : theme.secondary)};
   min-height: 45px;
-  border: 1px solid
-    ${({ theme, reverse }) => (reverse ? theme.primary : theme.p)};
+  border: 1px solid ${({ theme }) => theme.primary};
   transition: 200ms ease;
   display: flex;
   align-items: center;
